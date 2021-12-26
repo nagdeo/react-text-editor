@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ReactTextEditor.css";
 // import EmojiComponent from "../../common/EmojiComponent";
+import { FaBold,FaItalic,FaUnderline,FaListUl,FaListOl,FaImages,FaFileAlt,FaSmile } from "react-icons/fa";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -415,18 +416,22 @@ const ReactTextEditor = (props) => {
           id="details"
           // onBlur={(e) => handleTextFieldBlur(e, "details")}
         >
+        
+         
+
           {showOptions && (
             <div className="rte-text-editor-tools" id="editor-tools">
-              <img
+             
+              {props?.options?.includes("bold") && <FaBold 
                 onClick={() => {
                   handleFontStyleIconClick("bold");
                 }}
-                src={isBold === "true" ? "boldSelected" : "bold"}
+                // src={isBold === "true" ? "boldSelected" : "bold"}
                 alt=""
                 className="rte-tools-icon"
-              />
+              />}
 
-              <img
+              {/* <img
                 onClick={() => {
                   // handleFontStyleIconClick("bold");
                   handlePickEmojiOrLink("");
@@ -436,8 +441,8 @@ const ReactTextEditor = (props) => {
                 src={isBold === "true" ? "Images.boldSelected" : "Images.bold"}
                 alt=""
                 className="rte-tools-icon"
-              />
-              <img
+              /> */}
+             {props?.options?.includes("italic") && <FaItalic
                 onClick={() => {
                   handleFontStyleIconClick("italic");
                 }}
@@ -448,8 +453,8 @@ const ReactTextEditor = (props) => {
                 }
                 alt=""
                 className="rte-tools-icon"
-              />
-              <img
+              />}
+              {props?.options?.includes("underline") && <FaUnderline
                 onClick={() => {
                   handleFontStyleIconClick("underline");
                 }}
@@ -460,8 +465,8 @@ const ReactTextEditor = (props) => {
                 }
                 alt=""
                 className="rte-tools-icon"
-              />
-              <img
+              />}
+              {props?.options?.includes("unorderList") &&<FaListUl
                 onClick={() => {
                   handleFontStyleIconClick("insertUnorderedList");
                 }}
@@ -472,8 +477,8 @@ const ReactTextEditor = (props) => {
                 }
                 alt=""
                 className="rte-tools-icon"
-              />
-              <img
+              />}
+              {props?.options?.includes("orderList") &&<FaListOl
                 onClick={() => {
                   handleFontStyleIconClick("insertOrderedList");
                 }}
@@ -484,7 +489,7 @@ const ReactTextEditor = (props) => {
                 }
                 alt=""
                 className="rte-tools-icon"
-              />
+              />}
 
               {/* <img
                 onClick={() => {
@@ -496,15 +501,16 @@ const ReactTextEditor = (props) => {
                 alt=""
                 className="rte-tools-icon"
               /> */}
-              <img
+             {props?.options?.includes("emoji") && <FaSmile
                 onClick={() => handleEmojiIconClick()}
                 src={"Images.emojiIcon"}
                 alt=""
                 className="rte-tools-icon"
-              />
+              />}
+              {props?.options?.includes("file") &&
               <div className="rte-tools-icon">
                 <label className="icon-input-label" for="file-input">
-                  <img
+                  <FaFileAlt
                     style={{ cursor: "pointer" }}
                     src={
                       fileCount >= 6 || fileUploadError !== ""
@@ -523,10 +529,10 @@ const ReactTextEditor = (props) => {
                   name="myfile"
                   onChange={(e) => handleFileChange(e)}
                 />
-              </div>
-              <div className="rte-tools-icon">
+              </div>}
+             {props?.options?.includes("img") && <div className="rte-tools-icon">
                 <label className="icon-input-label" for="image-input">
-                  <img
+                  <FaImages
                     style={{ cursor: "pointer" }}
                     src={
                       imageCount >= 4 ||
@@ -550,7 +556,7 @@ const ReactTextEditor = (props) => {
                   name="myimg"
                   onChange={(e) => handleImageChange(e, -1, false)}
                 />
-              </div>
+              </div>}
             </div>
           )}
           <div
