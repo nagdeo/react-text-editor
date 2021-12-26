@@ -1,7 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ReactTextEditor.css";
 // import EmojiComponent from "../../common/EmojiComponent";
-import { FaBold,FaItalic,FaUnderline,FaListUl,FaListOl,FaImages,FaFileAlt,FaSmile } from "react-icons/fa";
+import circle from "../circle-solid.svg";
+import {
+  FaBold,
+  FaItalic,
+  FaUnderline,
+  FaListUl,
+  FaListOl,
+  FaImages,
+  FaFileAlt,
+  FaSmile,
+} from "react-icons/fa";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -416,80 +426,85 @@ const ReactTextEditor = (props) => {
           id="details"
           // onBlur={(e) => handleTextFieldBlur(e, "details")}
         >
-        
-         
-
           {showOptions && (
             <div className="rte-text-editor-tools" id="editor-tools">
-             
-              {props?.options?.includes("bold") && <FaBold 
+              {/* {props?.options?.includes("bold") && <FaBold 
                 onClick={() => {
                   handleFontStyleIconClick("bold");
                 }}
                 // src={isBold === "true" ? "boldSelected" : "bold"}
                 alt=""
                 className="rte-tools-icon"
-              />}
+              />} */}
 
-              {/* <img
+              <img
                 onClick={() => {
-                  // handleFontStyleIconClick("bold");
-                  handlePickEmojiOrLink("");
+                  handleFontStyleIconClick("bold");
+                  // handlePickEmojiOrLink("");
                   // handlePromptClick();
                   // console.log(selected);
                 }}
-                src={isBold === "true" ? "Images.boldSelected" : "Images.bold"}
+                src={isBold === "true" ? circle : circle}
                 alt=""
                 className="rte-tools-icon"
-              /> */}
-             {props?.options?.includes("italic") && <FaItalic
-                onClick={() => {
-                  handleFontStyleIconClick("italic");
-                }}
-                src={
-                  isItalic === "true"
-                    ? "Images.italicSelected"
-                    : "Images.italic"
-                }
-                alt=""
-                className="rte-tools-icon"
-              />}
-              {props?.options?.includes("underline") && <FaUnderline
-                onClick={() => {
-                  handleFontStyleIconClick("underline");
-                }}
-                src={
-                  isUnderline === "true"
-                    ? " Images.underlineSelected"
-                    : "Images.underline"
-                }
-                alt=""
-                className="rte-tools-icon"
-              />}
-              {props?.options?.includes("unorderList") &&<FaListUl
-                onClick={() => {
-                  handleFontStyleIconClick("insertUnorderedList");
-                }}
-                src={
-                  isUnorderedList === "true"
-                    ? "Images.unorderedSelected"
-                    : "Images.unorderedList"
-                }
-                alt=""
-                className="rte-tools-icon"
-              />}
-              {props?.options?.includes("orderList") &&<FaListOl
-                onClick={() => {
-                  handleFontStyleIconClick("insertOrderedList");
-                }}
-                src={
-                  isOrderedList === "true"
-                    ? "Images.orderedSelected"
-                    : "Images.orderedList"
-                }
-                alt=""
-                className="rte-tools-icon"
-              />}
+                width={"20px"}
+              />
+              {props?.options?.includes("italic") && (
+                <FaItalic
+                  onClick={() => {
+                    handleFontStyleIconClick("italic");
+                  }}
+                  src={
+                    isItalic === "true"
+                      ? "Images.italicSelected"
+                      : "Images.italic"
+                  }
+                  alt=""
+                  className="rte-tools-icon"
+                />
+              )}
+              {props?.options?.includes("underline") && (
+                <FaUnderline
+                  onClick={() => {
+                    handleFontStyleIconClick("underline");
+                  }}
+                  src={
+                    isUnderline === "true"
+                      ? " Images.underlineSelected"
+                      : "Images.underline"
+                  }
+                  alt=""
+                  className="rte-tools-icon"
+                />
+              )}
+              {props?.options?.includes("unorderList") && (
+                <FaListUl
+                  onClick={() => {
+                    handleFontStyleIconClick("insertUnorderedList");
+                  }}
+                  src={
+                    isUnorderedList === "true"
+                      ? "Images.unorderedSelected"
+                      : "Images.unorderedList"
+                  }
+                  alt=""
+                  className="rte-tools-icon"
+                />
+              )}
+              {props?.options?.includes("orderList") && (
+                <FaListOl
+                  onClick={() => {
+                    handleFontStyleIconClick("insertOrderedList");
+                  }}
+                  src={
+                    isOrderedList === "true"
+                      ? "Images.orderedSelected"
+                      : "Images.orderedList"
+                  }
+                  alt=""
+                  className="rte-tools-icon"
+                />
+              )}
 
               {/* <img
                 onClick={() => {
@@ -501,62 +516,69 @@ const ReactTextEditor = (props) => {
                 alt=""
                 className="rte-tools-icon"
               /> */}
-             {props?.options?.includes("emoji") && <FaSmile
-                onClick={() => handleEmojiIconClick()}
-                src={"Images.emojiIcon"}
-                alt=""
-                className="rte-tools-icon"
-              />}
-              {props?.options?.includes("file") &&
-              <div className="rte-tools-icon">
-                <label className="icon-input-label" for="file-input">
-                  <FaFileAlt
-                    style={{ cursor: "pointer" }}
-                    src={
-                      fileCount >= 6 || fileUploadError !== ""
-                        ? "Images.fileIconDisabled"
-                        : "Images.uploadFileIcon"
-                    }
-                    alt=""
-                  />
-                </label>
-
-                <input
-                  style={{ cursor: "pointer", display: "none" }}
-                  type="file"
-                  id="file-input"
-                  disabled={(fileCount >= 6 || fileUploadError !== "") && true}
-                  name="myfile"
-                  onChange={(e) => handleFileChange(e)}
+              {props?.options?.includes("emoji") && (
+                <FaSmile
+                  onClick={() => handleEmojiIconClick()}
+                  src={"Images.emojiIcon"}
+                  alt=""
+                  className="rte-tools-icon"
                 />
-              </div>}
-             {props?.options?.includes("img") && <div className="rte-tools-icon">
-                <label className="icon-input-label" for="image-input">
-                  <FaImages
-                    style={{ cursor: "pointer" }}
-                    src={
-                      imageCount >= 4 ||
-                      imageUploadError.imageErrorMessage !== ""
-                        ? "Images.imageIconDisabled"
-                        : "Images.uploadImageIcon"
-                    }
-                    alt=""
-                  />
-                </label>
+              )}
+              {props?.options?.includes("file") && (
+                <div className="rte-tools-icon">
+                  <label className="icon-input-label" for="file-input">
+                    <FaFileAlt
+                      style={{ cursor: "pointer" }}
+                      src={
+                        fileCount >= 6 || fileUploadError !== ""
+                          ? "Images.fileIconDisabled"
+                          : "Images.uploadFileIcon"
+                      }
+                      alt=""
+                    />
+                  </label>
 
-                <input
-                  style={{ cursor: "pointer", display: "none" }}
-                  type="file"
-                  id="image-input"
-                  disabled={
-                    (imageCount >= 4 ||
-                      imageUploadError.imageErrorMessage !== "") &&
-                    true
-                  }
-                  name="myimg"
-                  onChange={(e) => handleImageChange(e, -1, false)}
-                />
-              </div>}
+                  <input
+                    style={{ cursor: "pointer", display: "none" }}
+                    type="file"
+                    id="file-input"
+                    disabled={
+                      (fileCount >= 6 || fileUploadError !== "") && true
+                    }
+                    name="myfile"
+                    onChange={(e) => handleFileChange(e)}
+                  />
+                </div>
+              )}
+              {props?.options?.includes("img") && (
+                <div className="rte-tools-icon">
+                  <label className="icon-input-label" for="image-input">
+                    <FaImages
+                      style={{ cursor: "pointer" }}
+                      src={
+                        imageCount >= 4 ||
+                        imageUploadError.imageErrorMessage !== ""
+                          ? "Images.imageIconDisabled"
+                          : "Images.uploadImageIcon"
+                      }
+                      alt=""
+                    />
+                  </label>
+
+                  <input
+                    style={{ cursor: "pointer", display: "none" }}
+                    type="file"
+                    id="image-input"
+                    disabled={
+                      (imageCount >= 4 ||
+                        imageUploadError.imageErrorMessage !== "") &&
+                      true
+                    }
+                    name="myimg"
+                    onChange={(e) => handleImageChange(e, -1, false)}
+                  />
+                </div>
+              )}
             </div>
           )}
           <div
