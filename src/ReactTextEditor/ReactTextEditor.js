@@ -13,6 +13,7 @@ import emoji from "../assets/images/emoji.svg";
 import tableIcon from "../assets/images/table.svg";
 import tableAdd from "../assets/images/table-add-rc.svg";
 import tableDel from "../assets/images/table-delete.svg";
+import link from "../assets/images/link.svg";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -474,15 +475,7 @@ const ReactTextEditor = (props) => {
         >
           {showOptions && (
             <div className="rte-text-editor-tools" id="editor-tools">
-              {/* {props?.options?.includes("bold") && <FaBold 
-                onClick={() => {
-                  handleFontStyleIconClick("bold");
-                }}
-                // src={isBold === "true" ? "boldSelected" : "bold"}
-                alt=""
-                className="rte-tools-icon"
-              />} */}
-
+              
               <img
                 onClick={() => {
                   handleFontStyleIconClick("bold");
@@ -550,7 +543,7 @@ const ReactTextEditor = (props) => {
               /> */}
               {props?.options?.includes("emoji") && (
                 <img
-                  onClick={() => handleEmojiIconClick()}
+                 // onClick={() => handleEmojiIconClick()}
                   src={emoji}
                   alt=""
                   className="rte-tools-icon"
@@ -610,6 +603,15 @@ const ReactTextEditor = (props) => {
                   />
                 </div>
               )}
+              {props?.options?.includes("link") && <img 
+                onClick={() => {
+                  handlePickEmojiOrLink("");
+                }}
+                 src={link}
+                alt=""
+                className="rte-tools-icon"
+              />}
+
               {props?.options?.includes("table") && (
                 <div className="rte-tools-icon">
                   <div onClick={fnOpenTable}>
