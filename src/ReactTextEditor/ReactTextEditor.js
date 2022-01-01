@@ -1,17 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ReactTextEditor.css";
 // import EmojiComponent from "../../common/EmojiComponent";
-import circle from "../circle-solid.svg";
-import {
-  FaBold,
-  FaItalic,
-  FaUnderline,
-  FaListUl,
-  FaListOl,
-  FaImages,
-  FaFileAlt,
-  FaSmile,
-} from "react-icons/fa";
+
+import bold from "../assets/images/bold.svg";
+import italic from "../assets/images/italic.svg";
+import underline from "../assets/images/underline.svg";
+import orderedList from "../assets/images/ordered.svg";
+import unorderedList from "../assets/images/unordered.svg";
+import image from "../assets/images/image.svg";
+import file from "../assets/images/file.svg";
+import emoji from "../assets/images/emoji.svg";
+import tableIcon from "../assets/images/table.svg";
+import tableAdd from "../assets/images/table-add-rc.svg";
+import tableDel from "../assets/images/table-delete.svg";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,6 +36,19 @@ const ReactTextEditor = (props) => {
   const detailsRef = useRef(null);
   const contentEditableRef = useRef(null);
   const contentEditableGif = useRef(null);
+  const [openTable, setOpenTable] = useState(false);
+  const [table, setTable] = useState([
+    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""],
+  ]);
+  const [rowCol, setRowCol] = useState({
+    row: -1,
+    col: -1,
+  });
 
   if (
     document.getElementById("contentEditableId") !== undefined &&
@@ -208,6 +222,37 @@ const ReactTextEditor = (props) => {
 
   const handleEmojiIconClick = () => {
     document.getElementById("emojiMart").style.display = "block";
+  };
+
+  const fnOpenTable = () => {
+    setOpenTable(!openTable);
+  };
+  const onTableCellsHover = (i, j) => {
+    setRowCol({
+      row: i,
+      col: j,
+    });
+  };
+  const fnAddTable = (rows, cols) => {
+    let tr = "",
+      table = "";
+    for (let i = 0; i <= rows; i++) {
+      tr += "<tr>";
+      for (let j = 0; j <= cols; j++) {
+        tr += "<td><div></div></td>";
+      }
+      tr += "</tr>";
+    }
+    table =
+      "<table border='1' class='generate-table' id=table_" +
+      rows +
+      "_" +
+      cols +
+      ">" +
+      tr +
+      "</table>";
+    document.getElementById("contentEditableId").innerHTML += table;
+    setOpenTable(false);
   };
 
   const handlePasteOnContentEditable = (e) => {
@@ -444,63 +489,49 @@ const ReactTextEditor = (props) => {
                   // handlePromptClick();
                   // console.log(selected);
                 }}
-                src={isBold === "true" ? circle : circle}
+                src={isBold === "true" ? bold : bold}
                 alt=""
                 className="rte-tools-icon"
                 width={"20px"}
               />
               {props?.options?.includes("italic") && (
-                <FaItalic
+                <img
                   onClick={() => {
                     handleFontStyleIconClick("italic");
                   }}
-                  src={
-                    isItalic === "true"
-                      ? "Images.italicSelected"
-                      : "Images.italic"
-                  }
+                  src={isItalic === "true" ? italic : italic}
                   alt=""
                   className="rte-tools-icon"
                 />
               )}
               {props?.options?.includes("underline") && (
-                <FaUnderline
+                <img
                   onClick={() => {
                     handleFontStyleIconClick("underline");
                   }}
-                  src={
-                    isUnderline === "true"
-                      ? " Images.underlineSelected"
-                      : "Images.underline"
-                  }
+                  src={isUnderline === "true" ? underline : underline}
                   alt=""
                   className="rte-tools-icon"
                 />
               )}
               {props?.options?.includes("unorderList") && (
-                <FaListUl
+                <img
                   onClick={() => {
                     handleFontStyleIconClick("insertUnorderedList");
                   }}
                   src={
-                    isUnorderedList === "true"
-                      ? "Images.unorderedSelected"
-                      : "Images.unorderedList"
+                    isUnorderedList === "true" ? unorderedList : unorderedList
                   }
                   alt=""
                   className="rte-tools-icon"
                 />
               )}
               {props?.options?.includes("orderList") && (
-                <FaListOl
+                <img
                   onClick={() => {
                     handleFontStyleIconClick("insertOrderedList");
                   }}
-                  src={
-                    isOrderedList === "true"
-                      ? "Images.orderedSelected"
-                      : "Images.orderedList"
-                  }
+                  src={isOrderedList === "true" ? orderedList : orderedList}
                   alt=""
                   className="rte-tools-icon"
                 />
@@ -517,9 +548,9 @@ const ReactTextEditor = (props) => {
                 className="rte-tools-icon"
               /> */}
               {props?.options?.includes("emoji") && (
-                <FaSmile
+                <img
                   onClick={() => handleEmojiIconClick()}
-                  src={"Images.emojiIcon"}
+                  src={emoji}
                   alt=""
                   className="rte-tools-icon"
                 />
@@ -527,12 +558,10 @@ const ReactTextEditor = (props) => {
               {props?.options?.includes("file") && (
                 <div className="rte-tools-icon">
                   <label className="icon-input-label" for="file-input">
-                    <FaFileAlt
+                    <img
                       style={{ cursor: "pointer" }}
                       src={
-                        fileCount >= 6 || fileUploadError !== ""
-                          ? "Images.fileIconDisabled"
-                          : "Images.uploadFileIcon"
+                        fileCount >= 6 || fileUploadError !== "" ? file : file
                       }
                       alt=""
                     />
@@ -551,15 +580,16 @@ const ReactTextEditor = (props) => {
                 </div>
               )}
               {props?.options?.includes("img") && (
-                <div className="rte-tools-icon">
+                <div className="rte-tools-icon ">
                   <label className="icon-input-label" for="image-input">
-                    <FaImages
+                    <img
                       style={{ cursor: "pointer" }}
+                      className="m-t-3"
                       src={
                         imageCount >= 4 ||
                         imageUploadError.imageErrorMessage !== ""
-                          ? "Images.imageIconDisabled"
-                          : "Images.uploadImageIcon"
+                          ? image
+                          : image
                       }
                       alt=""
                     />
@@ -577,6 +607,48 @@ const ReactTextEditor = (props) => {
                     name="myimg"
                     onChange={(e) => handleImageChange(e, -1, false)}
                   />
+                </div>
+              )}
+              {props?.options?.includes("table") && (
+                <div className="rte-tools-icon">
+                  <div onClick={fnOpenTable}>
+                    <img style={{ cursor: "pointer" }} className="m-t-3" src={tableIcon} alt="" />
+                  </div>
+                  {openTable && (
+                    <div class="dropdown-menu share-options">
+                      <p>
+                        Insert {rowCol.row + 1}x{rowCol.col + 1} table
+                      </p>
+                      <ul class="list-ul">
+                        {table.map((row, index) => (
+                          <li>
+                            {row.map((col, i) => (
+                              <div
+                                className={`select-table-rows-cols display-inline 
+                                  ${
+                                    index <= rowCol.row &&
+                                    i <= rowCol.col &&
+                                    "background-color-purple"
+                                  }`}
+                                onMouseLeave={() => onTableCellsHover(index, i)}
+                                onClick={() => fnAddTable(index, i)}
+                              ></div>
+                            ))}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+              {props?.options?.includes("table") && (
+                <div className="rte-tools-icon ">
+                  <img style={{ cursor: "pointer" }} className="m-t-3" src={tableAdd} alt="" />
+                </div>
+              )}
+              {props?.options?.includes("table") && (
+                <div className="rte-tools-icon">
+                  <img style={{ cursor: "pointer" }} className="m-t-3" src={tableDel} alt="" />
                 </div>
               )}
             </div>
