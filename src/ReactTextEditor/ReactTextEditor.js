@@ -225,6 +225,7 @@ const ReactTextEditor = (props) => {
   };
 
   const fnOpenTable = () => {
+    setRowCol({row:-1,col:-1});
     setOpenTable(!openTable);
   };
   const onTableCellsHover = (i, j) => {
@@ -489,9 +490,9 @@ const ReactTextEditor = (props) => {
                   // handlePromptClick();
                   // console.log(selected);
                 }}
-                src={isBold === "true" ? bold : bold}
+                src={bold}
                 alt=""
-                className="rte-tools-icon"
+                className={`rte-tools-icon  ${isBold === "true" && "back-lightgrey"}`}
                 width={"20px"}
               />
               {props?.options?.includes("italic") && (
@@ -499,9 +500,9 @@ const ReactTextEditor = (props) => {
                   onClick={() => {
                     handleFontStyleIconClick("italic");
                   }}
-                  src={isItalic === "true" ? italic : italic}
+                  src={italic}
                   alt=""
-                  className="rte-tools-icon"
+                  className={`rte-tools-icon  ${isItalic === "true" && "back-lightgrey"}`}
                 />
               )}
               {props?.options?.includes("underline") && (
@@ -509,9 +510,9 @@ const ReactTextEditor = (props) => {
                   onClick={() => {
                     handleFontStyleIconClick("underline");
                   }}
-                  src={isUnderline === "true" ? underline : underline}
+                  src={underline}
                   alt=""
-                  className="rte-tools-icon"
+                  className={`rte-tools-icon  ${isUnderline === "true" && "back-lightgrey"}`}
                 />
               )}
               {props?.options?.includes("unorderList") && (
@@ -520,10 +521,10 @@ const ReactTextEditor = (props) => {
                     handleFontStyleIconClick("insertUnorderedList");
                   }}
                   src={
-                    isUnorderedList === "true" ? unorderedList : unorderedList
+                     unorderedList
                   }
                   alt=""
-                  className="rte-tools-icon"
+                  className={`rte-tools-icon  ${isUnorderedList === "true" && "back-lightgrey"}`}
                 />
               )}
               {props?.options?.includes("orderList") && (
@@ -531,9 +532,9 @@ const ReactTextEditor = (props) => {
                   onClick={() => {
                     handleFontStyleIconClick("insertOrderedList");
                   }}
-                  src={isOrderedList === "true" ? orderedList : orderedList}
+                  src={orderedList}
                   alt=""
-                  className="rte-tools-icon"
+                  className={`rte-tools-icon  ${isOrderedList === "true" && "back-lightgrey"}`}
                 />
               )}
 
