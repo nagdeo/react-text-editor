@@ -14,6 +14,12 @@ import tableIcon from "../assets/images/table.svg";
 import tableAdd from "../assets/images/table-add-rc.svg";
 import tableDel from "../assets/images/table-delete.svg";
 import link from "../assets/images/link.svg";
+import undo from "../assets/images/undo.svg";
+import redo from "../assets/images/redo.svg";
+import subscript from "../assets/images/subscript.svg";
+import superscript from "../assets/images/superscript.svg";
+import alignRight from "../assets/images/align-right.svg";
+import alignCenter from "../assets/images/align-center.svg";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -475,6 +481,61 @@ const ReactTextEditor = (props) => {
         >
           {showOptions && (
             <div className="rte-text-editor-tools" id="editor-tools">
+              <img
+                onClick={() => {
+                  handleFontStyleIconClick("undo");
+                }}
+                src={undo}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
+              <img
+                onClick={() => {
+                  handleFontStyleIconClick("redo");
+                  
+                }}
+                src={redo}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
+            <img
+                onClick={() => {
+                  handleFontStyleIconClick("JustifyRight");
+                }}
+                src={alignRight}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
+              <img
+                onClick={() => {
+                  handleFontStyleIconClick("JustifyCenter");
+                }}
+                src={alignCenter}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
+              <img
+                onClick={() => {
+                  handleFontStyleIconClick("subscript");
+                }}
+                src={subscript}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
+              <img
+                onClick={() => {
+                  handleFontStyleIconClick("superscript");
+                }}
+                src={superscript}
+                alt=""
+                className={`rte-tools-icon`}
+                width={"20px"}
+              />
               
               <img
                 onClick={() => {
