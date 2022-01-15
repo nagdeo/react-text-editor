@@ -44,14 +44,7 @@ const ReactTextEditor = (props) => {
   const contentEditableRef = useRef(null);
   const contentEditableGif = useRef(null);
   const [openTable, setOpenTable] = useState(false);
-  const [table, setTable] = useState([
-    ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
-    ["", "", "", "", "", ""],
-  ]);
+  const [table, setTable] = useState();
   const [rowCol, setRowCol] = useState({
     row: -1,
     col: -1,
@@ -72,6 +65,16 @@ const ReactTextEditor = (props) => {
       });
   }
 
+  useEffect(()=>{
+    setTable([
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+    ])
+  },[])
   useEffect(() => {
     function handleDetailsOutsideClick(event) {
       if (
@@ -221,9 +224,9 @@ const ReactTextEditor = (props) => {
     document.getElementById("emojiMart").style.display = "none";
   };
 
-  const handleEmojiIconClick = () => {
-    document.getElementById("emojiMart").style.display = "block";
-  };
+  // const handleEmojiIconClick = () => {
+  //   document.getElementById("emojiMart").style.display = "block";
+  // };
 
   const fnOpenTable = () => {
     setRowCol({row:-1,col:-1});
@@ -280,7 +283,7 @@ const ReactTextEditor = (props) => {
   const handleImageChange = (e, index, replace) => {
     e.preventDefault();
     let files = Array.from(e.target.files);
-    let file1 = e.target.files[0];
+    // let file1 = e.target.files[0];
     // const fileType = file1["type"];
     // const validImageTypes = [
     //   "image/gif",
@@ -362,7 +365,7 @@ const ReactTextEditor = (props) => {
 
     let files = Array.from(e.target.files);
 
-    let file1 = e.target.files[0];
+    // let file1 = e.target.files[0];
     // const fileType = file1["type"];
     // const validImageTypes = [
     //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
