@@ -9,10 +9,10 @@ import orderedList from "../assets/images/ordered.svg";
 import unorderedList from "../assets/images/unordered.svg";
 import image from "../assets/images/image.svg";
 import file from "../assets/images/file.svg";
-import emoji from "../assets/images/emoji.svg";
+// import emoji from "../assets/images/emoji.svg";
 import tableIcon from "../assets/images/table.svg";
-import tableAdd from "../assets/images/table-add-rc.svg";
-import tableDel from "../assets/images/table-delete.svg";
+// import tableAdd from "../assets/images/table-add-rc.svg";
+// import tableDel from "../assets/images/table-delete.svg";
 import link from "../assets/images/link.svg";
 import undo from "../assets/images/undo.svg";
 import redo from "../assets/images/redo.svg";
@@ -23,7 +23,6 @@ import alignCenter from "../assets/images/align-center.svg";
 import deleteIcon from "../assets/images/delete.svg";
 
 const ReactTextEditor = (props) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [imageArray, setImageArray] = useState([]);
   const [imageCount, setImageCount] = useState(0);
@@ -141,19 +140,13 @@ const ReactTextEditor = (props) => {
   //   // });
   // }, [isExpanded]);
 
-  const handleCreatePostClick = () => {
-    isExpanded ? setIsExpanded(false) : setIsExpanded(true);
-  };
-  const handleCloseCreatePostClick = () => {
-    isExpanded ? setIsExpanded(false) : setIsExpanded(true);
-  };
   const handlePickEmojiOrLink = (val) => {
     contentEditableRef.current.focus();
 
     let emojiOrLink = "";
     if (val === "") {
       let linkURL = prompt("Enter a URL:", "http://");
-      let selected = window.getSelection();
+      // let selected = window.getSelection();
 
       // if (
       //   selected?.anchorNode?.data?.includes("https") ||
@@ -205,7 +198,7 @@ const ReactTextEditor = (props) => {
           sel.addRange(range);
         }
       }
-    } else if (document.selection && document.selection.type != "Control") {
+    } else if (document.selection && document.selection.type !== "Control") {
       // IE < 9
       document.selection.createRange().pasteHTML(emojiOrLink);
     }
@@ -460,13 +453,11 @@ const ReactTextEditor = (props) => {
     document.execCommand(fontStyle, false, null);
   };
 
-  const handleValueChange = (e, fieldName) => {};
+  
 
   const handleTextFieldBlur = (event, fieldName) => {
     //On blur of Div.
   };
-
-  const handleDropdownChange = (field, value) => {};
 
   return (
     <div className="rte-expanded">
@@ -812,16 +803,16 @@ const ReactTextEditor = (props) => {
           {/* {fileCount}/6 added */}
           <div className="rte-uploaded-files-container">
             {fileArray.map((file, index) => {
-              let fileIcon;
-              if (file.fileType.includes("presentation")) {
-                fileIcon = "Images.powerpointIcon";
-              } else if (file.fileType.includes("pdf")) {
-                fileIcon = "Images.pdfIcon";
-              } else if (file.fileType.includes("sheet")) {
-                fileIcon = "Images.excelIcon";
-              } else {
-                fileIcon = "Images.wordIcon";
-              }
+              // let fileIcon;
+              // if (file.fileType.includes("presentation")) {
+              //   fileIcon = "Images.powerpointIcon";
+              // } else if (file.fileType.includes("pdf")) {
+              //   fileIcon = "Images.pdfIcon";
+              // } else if (file.fileType.includes("sheet")) {
+              //   fileIcon = "Images.excelIcon";
+              // } else {
+              //   fileIcon = "Images.wordIcon";
+              // }
               return (
                 <div className="rte-uploaded-files">
                   <div className="rte-single-file">
