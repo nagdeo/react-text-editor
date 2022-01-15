@@ -8,7 +8,7 @@ function App() {
   let allowedImageTypes=["gif","jpeg","png","jpg",];
   return (
     <div>
-      <ReactTextEditor  options={options}/>
+      <ReactTextEditor  options={options} lable={"Detail"}/>
     </div>
   );
 }

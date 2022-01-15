@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   padding: 0 8px;
-  
+ 
 }
 .rte-container .rte-user-profile {
   width: 32px;
@@ -72,8 +72,8 @@
 .rte-expanded {
   animation: animateCreatePost 0.5s forwards 0s ease-in-out;
   opacity: 1;
-  width: 85%;
-  max-width: 668px;
+  width: 100%;
+  max-width: 60%;
   margin: 0 auto;
   background: #fff;
   border: 1px solid #e6e6dc;
@@ -182,6 +182,7 @@
   border-bottom: 1px solid #e6e6dc;
   padding: 5px 12px;
   display: flex;
+  flex-wrap: wrap;
 }
 .rte-expanded
   .rte-expanded-input-text
@@ -203,7 +204,7 @@
   display: flex;
 }
 .rte-expanded .rte-expanded-input-text .active {
-  border: 0.5px solid blue;
+  /* border: 0.5px solid blue; */
 }
 .rte-expanded .rte-expanded-input-text .bold {
   font-weight: bold;
@@ -305,8 +306,6 @@
 }
 .rte-expanded .rte-uploaded-images-main-container .rte-uploaded-images-count {
   margin-bottom: 8px;
-  font-size: 12px;
-  color: #686868;
   font-family: Graphik;
   line-height: 12px;
 }
@@ -367,8 +366,10 @@
   .rte-image-edit-delete-icons {
   display: block;
   position: absolute;
-  bottom: 96px;
-  left: 60px;
+  width: 100%;
+  height: 100%;
+  background: lightgrey;
+  opacity: 0.7;
 }
 .rte-expanded
   .rte-uploaded-images-main-container
@@ -573,8 +574,7 @@
   .rte-uploaded-files
   .rte-single-file
   .rte-single-file-name-size {
-  border-left: 1px solid #e6e6dc;
-  height: 100%;
+ 
   padding: 8px 4px 8px 8px;
 }
 .rte-expanded
@@ -743,4 +743,9 @@ table.generate-table tr td div {
 }
 .back-lightgrey{
   background: lightgrey;
+}
+.rte-image-delete-icon{
+  position: absolute;
+  top: 40%;
+  left: 40%;
 }

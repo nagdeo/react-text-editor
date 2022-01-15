@@ -20,6 +20,7 @@ import subscript from "../assets/images/subscript.svg";
 import superscript from "../assets/images/superscript.svg";
 import alignRight from "../assets/images/align-right.svg";
 import alignCenter from "../assets/images/align-center.svg";
+import deleteIcon from "../assets/images/delete.svg";
 
 const ReactTextEditor = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -287,27 +288,27 @@ const ReactTextEditor = (props) => {
     e.preventDefault();
     let files = Array.from(e.target.files);
     let file1 = e.target.files[0];
-    const fileType = file1["type"];
-    const validImageTypes = [
-      "image/gif",
-      "image/jpeg",
-      "image/png",
-      "image/jpg",
-    ];
-    if (validImageTypes.includes(fileType)) {
-      if (file1 && file1.size > 10e5) {
-        if (replace) {
-          props.functionShowSnackBar(
-            true,
-            "File exceeds maximum limit of 1MB",
-            false
-          );
-        } else {
-          setImageUploadError({
-            imageErrorMessage: "File exceeds maximum limit of 1MB",
-          });
-        }
-      } else {
+    // const fileType = file1["type"];
+    // const validImageTypes = [
+    //   "image/gif",
+    //   "image/jpeg",
+    //   "image/png",
+    //   "image/jpg",
+    // ];
+    // if (validImageTypes.includes(fileType)) {
+      // if (file1 && file1.size > 10e5) {
+      //   if (replace) {
+      //     props.functionShowSnackBar(
+      //       true,
+      //       "File exceeds maximum limit of 1MB",
+      //       false
+      //     );
+      //   } else {
+      //     setImageUploadError({
+      //       imageErrorMessage: "File exceeds maximum limit of 1MB",
+      //     });
+      //   }
+      // } else {
         files.forEach((file) => {
           let reader = new FileReader();
           reader.onload = () => {
@@ -345,21 +346,22 @@ const ReactTextEditor = (props) => {
           };
           reader.readAsDataURL(file);
         });
-      }
+      // }
       e.target.value = "";
-    } else {
-      if (replace) {
-        props.functionShowSnackBar(
-          true,
-          "Allowed file types: .jpeg, .jpg, .png",
-          false
-        );
-      } else {
-        setImageUploadError({
-          imageErrorMessage: "Allowed file types: .jpeg, .jpg, .png",
-        });
-      }
-    }
+    // } else {
+    //   if (replace) {
+    //     props.functionShowSnackBar(
+    //       true,
+    //       "Allowed file types: .jpeg, .jpg, .png",
+    //       false
+    //     );
+    //   } else {
+    //     setImageUploadError({
+    //       imageErrorMessage: "Allowed file types: .jpeg, .jpg, .png",
+    //     });
+    //   }
+    // }
+    setShowOptions(false)
   };
 
   const handleFileChange = (e) => {
@@ -368,18 +370,19 @@ const ReactTextEditor = (props) => {
     let files = Array.from(e.target.files);
 
     let file1 = e.target.files[0];
-    const fileType = file1["type"];
-    const validImageTypes = [
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "application/pdf",
-    ];
-    if (validImageTypes.includes(fileType)) {
-      if (file1 && file1.size > 10e5) {
-        // alert("Image cannot exceed 1MB");
-        setFileUploadError("File exceeds maximum limit of 1MB");
-      } else {
+    // const fileType = file1["type"];
+    // const validImageTypes = [
+    //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    //   "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    //   "application/pdf",
+    // ];
+    // if (validImageTypes.includes(fileType)) {
+    //   if (file1 && file1.size > 10e5) {
+    //     // alert("Image cannot exceed 1MB");
+    //     setFileUploadError("File exceeds maximum limit of 1MB");
+    //   } 
+      // else {
         files.forEach((file) => {
           let reader = new FileReader();
 
@@ -406,11 +409,12 @@ const ReactTextEditor = (props) => {
 
           reader.readAsDataURL(file);
         });
-      }
+      // }
       e.target.value = "";
-    } else {
-      setFileUploadError("Allowed file types: .pdf, .docx, .pptx, .xlxs");
-    }
+    // } else {
+    //   setFileUploadError("Allowed file types: .pdf, .docx, .pptx, .xlxs");
+    // }
+    setShowOptions(false)
   };
 
   const handleDeleteImageClick = (index, imageBase64) => {
@@ -468,7 +472,7 @@ const ReactTextEditor = (props) => {
     <div className="rte-expanded">
       <div className="rte-expanded-input-text">
         <label for="title" className="input-label">
-          Details<span>*</span>
+          {props?.label}
         </label>
         <div
           className={`rte-text-editor-tools-text ${
@@ -479,7 +483,6 @@ const ReactTextEditor = (props) => {
           id="details"
           // onBlur={(e) => handleTextFieldBlur(e, "details")}
         >
-          {showOptions && (
             <div className="rte-text-editor-tools" id="editor-tools">
               <img
                 onClick={() => {
@@ -602,21 +605,21 @@ const ReactTextEditor = (props) => {
                 alt=""
                 className="rte-tools-icon"
               /> */}
-              {props?.options?.includes("emoji") && (
+              {/* {props?.options?.includes("emoji") && (
                 <img
                  // onClick={() => handleEmojiIconClick()}
                   src={emoji}
                   alt=""
                   className="rte-tools-icon"
                 />
-              )}
+              )} */}
               {props?.options?.includes("file") && (
                 <div className="rte-tools-icon">
                   <label className="icon-input-label" for="file-input">
                     <img
                       style={{ cursor: "pointer" }}
                       src={
-                        fileCount >= 6 || fileUploadError !== "" ? file : file
+                         file
                       }
                       alt=""
                     />
@@ -626,9 +629,6 @@ const ReactTextEditor = (props) => {
                     style={{ cursor: "pointer", display: "none" }}
                     type="file"
                     id="file-input"
-                    disabled={
-                      (fileCount >= 6 || fileUploadError !== "") && true
-                    }
                     name="myfile"
                     onChange={(e) => handleFileChange(e)}
                   />
@@ -640,11 +640,7 @@ const ReactTextEditor = (props) => {
                     <img
                       style={{ cursor: "pointer" }}
                       className="m-t-3"
-                      src={
-                        imageCount >= 4 ||
-                        imageUploadError.imageErrorMessage !== ""
-                          ? image
-                          : image
+                      src={ image
                       }
                       alt=""
                     />
@@ -654,11 +650,7 @@ const ReactTextEditor = (props) => {
                     style={{ cursor: "pointer", display: "none" }}
                     type="file"
                     id="image-input"
-                    disabled={
-                      (imageCount >= 4 ||
-                        imageUploadError.imageErrorMessage !== "") &&
-                      true
-                    }
+                    
                     name="myimg"
                     onChange={(e) => handleImageChange(e, -1, false)}
                   />
@@ -705,7 +697,7 @@ const ReactTextEditor = (props) => {
                   )}
                 </div>
               )}
-              {props?.options?.includes("table") && (
+              {/* {props?.options?.includes("table") && (
                 <div className="rte-tools-icon ">
                   <img style={{ cursor: "pointer" }} className="m-t-3" src={tableAdd} alt="" />
                 </div>
@@ -714,9 +706,9 @@ const ReactTextEditor = (props) => {
                 <div className="rte-tools-icon">
                   <img style={{ cursor: "pointer" }} className="m-t-3" src={tableDel} alt="" />
                 </div>
-              )}
+              )} */}
             </div>
-          )}
+         
           <div
             contentEditable="true"
             className="rte-details-text"
@@ -742,7 +734,8 @@ const ReactTextEditor = (props) => {
       {(imageCount > 0 || imageUploadError.imageErrorMessage !== "") && (
         <div className="rte-uploaded-images-main-container">
           <p className="rte-uploaded-images-count">
-            Images: {imageCount}/4 added
+            Images: 
+            {/* {imageCount}/4 added */}
           </p>
           <div className="rte-uploaded-images-container">
             {imageArray.map((file, index) => {
@@ -776,7 +769,7 @@ const ReactTextEditor = (props) => {
 
                     <img
                       className="rte-image-delete-icon"
-                      src={"Images.deleteImageIcon"}
+                      src={deleteIcon}
                       alt=""
                       onClick={() =>
                         handleDeleteImageClick(index, file.filedata)
@@ -815,7 +808,8 @@ const ReactTextEditor = (props) => {
       )}
       {(fileCount > 0 || fileUploadError !== "") && (
         <div className="rte-uploaded-files-main-container">
-          Files: {fileCount}/6 added
+          Files: 
+          {/* {fileCount}/6 added */}
           <div className="rte-uploaded-files-container">
             {fileArray.map((file, index) => {
               let fileIcon;
@@ -831,11 +825,11 @@ const ReactTextEditor = (props) => {
               return (
                 <div className="rte-uploaded-files">
                   <div className="rte-single-file">
-                    <img
+                    {/* <img
                       className="rte-single-file-icon"
                       src={fileIcon}
                       alt=""
-                    />
+                    /> */}
                     <div className="rte-single-file-name-size">
                       <p className="rte-single-file-name">{file.fileName}</p>
                       <p className="rte-single-file-size">
@@ -844,7 +838,7 @@ const ReactTextEditor = (props) => {
                     </div>
                     <img
                       className="rte-single-file-close-icon"
-                      src={"Images.closeIcon"}
+                      src={deleteIcon}
                       alt=""
                       onClick={() =>
                         handleDeleteFileClick(index, file.filedata)
